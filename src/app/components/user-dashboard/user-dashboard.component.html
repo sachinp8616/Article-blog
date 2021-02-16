@@ -1,0 +1,55 @@
+<div class="row mt-5 justify-content-end">
+  <button class="btn btn-primary" (click)="createPost()">Create Post</button>
+</div>
+
+<div class="row mt-5">
+  <div class="col-md-10 offset-md-1">
+    <div
+      class="accordion"
+      id="accordionExample"
+      *ngFor="let post of posts; index as i"
+    >
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button
+              class="btn btn-link"
+              type="button"
+              data-toggle="collapse"
+              [attr.data-target]="'#collapseOne' + i"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              <h2>{{ post.title }}</h2>
+            </button>
+          </h2>
+        </div>
+
+        <div
+          [attr.id]="'collapseOne' + i"
+          class="collapse hide"
+          aria-labelledby="headingOne"
+          data-parent="#accordionExample"
+        >
+          <div class="card-body">
+            <h3>{{ post.created_by }}</h3>
+            <em>{{ post.desc }}</em>
+            <h6 class="justify-content-left mt-3">
+              {{ post.created_at }}
+            </h6>
+            <div class="text-right">
+              <i
+                class="fas fa-edit mr-4 text-primary"
+                (click)="onEdit(post.key)"
+              ></i>
+              <i
+                class="fas fa-trash text-danger"
+                (click)="onDeletePost(post.key)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

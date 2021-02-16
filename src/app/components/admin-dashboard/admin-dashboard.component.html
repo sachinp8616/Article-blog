@@ -1,0 +1,46 @@
+<div class="row mt-5 justify-content-end">
+  <button class="btn btn-primary" (click)="createPost()">Create Post</button>
+</div>
+
+<div class="row mt-5">
+  <div class="col">
+    <div class="table-responsive">
+      <table class="table table-bordered text-nowrap text-center">
+        <thead class="bg-dark text-light">
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Approve/Reject</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of posts$ | async">
+            <td>{{ post.created_at }}</td>
+            <td>{{ post.created_by }}</td>
+            <td>{{ post.title }}</td>
+            <td>{{ post.desc }}</td>
+            <td>
+              <button
+                [ngClass]="
+                  post.isAproved ? 'btn btn-danger' : 'btn btn-success'
+                "
+                (click)="toggler(post.key, post)"
+              >
+                {{ post.isAproved ? "Reject" : "Approve" }}
+              </button>
+            </td>
+            <td>
+              <i
+                class="fas fa-trash text-danger"
+                (click)="onDeletePost(post.key)"
+              ></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

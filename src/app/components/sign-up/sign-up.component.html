@@ -1,0 +1,76 @@
+<div class="row mt-5">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-header bg-dark text-light text-center">
+        <h5>Sign Up</h5>
+      </div>
+      <div class="card-body">
+        <form #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm.value)">
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              name="name"
+              ngModel
+              required
+              minlength="3"
+              #fname="ngModel"
+              [ngClass]="{ 'is-invalid': fname.errors && fname.touched }"
+            />
+            <div class="invalid-feedback">Name is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              name="email"
+              ngModel
+              required
+              minlength="6"
+              #femail="ngModel"
+              [ngClass]="{ 'is-invalid': femail.errors && femail.touched }"
+            />
+            <div class="invalid-feedback">Email is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              ngModel
+              required
+              minlength="6"
+              #fpass="ngModel"
+              [ngClass]="{ 'is-invalid': fpass.errors && fpass.touched }"
+            />
+            <div class="invalid-feedback">Password is Required</div>
+          </div>
+          <div class="form-group">
+            <label for="">Confirm Password</label>
+            <input
+              type="password"
+              class="form-control"
+              name="cpassword"
+              ngModel
+              required
+              minlength="6"
+              #fcpass="ngModel"
+              [ngClass]="{ 'is-invalid': fcpass.errors && fcpass.touched }"
+            />
+            <div class="invalid-feedback">Password is Required</div>
+          </div>
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="!signupForm.valid"
+          >
+            SignUp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

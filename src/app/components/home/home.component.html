@@ -1,0 +1,20 @@
+<div class="row mt-5">
+  <div class="col-md-10 col-xs-12">
+    <div class="card mt-2" *ngFor="let post of posts">
+      <div class="card-body">
+        <h1>{{ post.title }}</h1>
+        <div class="mb-3">
+          <em>posted by </em>
+          <strong>
+            {{ post.created_by }}
+          </strong>
+          <em>on</em>
+          <strong>
+            {{ post.created_at }}
+          </strong>
+        </div>
+        <p>{{ post.desc }}</p>
+      </div>
+    </div>
+  </div>
+</div>

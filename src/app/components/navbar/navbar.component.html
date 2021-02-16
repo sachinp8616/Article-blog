@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">ARTICLE BLOG</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" *ngIf="!userLoggedIn">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="sign-up" routerLinkActive="active"
+            >SignUp</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="sign-in" routerLinkActive="active"
+            >SignIn</a
+          >
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto" *ngIf="userLoggedIn">
+        <li class="nav-item">
+          <a href="" class="nav-link">
+            <img
+              style="margin-right: 10px"
+              src="http://www.gravatar.com/avatar/61dc3c45c69df368f1a4452b3c4843bb?s=200&r=pg&d=mm"
+              alt=""
+              class="img-fluid rounded-circle"
+              width="30"
+              height="30"
+            />{{ userInfo.name }}
+            <i
+              class="fa fa-sign-out-alt"
+              aria-hidden="true"
+              (click)="onSignOut()"
+            ></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
