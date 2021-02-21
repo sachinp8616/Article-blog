@@ -14,11 +14,16 @@
               name="email"
               [(ngModel)]="email"
               required
-              minlength="6"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
               #femail="ngModel"
               [ngClass]="{ 'is-invalid': femail.errors && femail.touched }"
             />
-            <div class="invalid-feedback">Email is required</div>
+            <div class="text-danger" *ngIf="femail.touched">
+              <small *ngIf="femail.errors?.required">Email is a required</small>
+              <small *ngIf="femail.errors?.pattern"
+                >This is not a valid Email</small
+              >
+            </div>
             <small class="text-danger" *ngIf="emailErr"
               >Email does not exists</small
             >
@@ -27,18 +32,28 @@
             <label for="">Password</label>
             <input
               type="password"
-              class="form-control"
-              name="password"
               [(ngModel)]="password"
+              name="password"
+              class="form-control"
               required
-              minlength="6"
-              #fpass="ngModel"
-              [ngClass]="{ 'is-invalid': fpass.errors && fpass.touched }"
+              #passwords="ngModel"
+              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              [ngClass]="{
+                'is-invalid': passwords.errors && passwords.touched
+              }"
             />
-            <div class="invalid-feedback">password is required</div>
-            <small class="text-danger" *ngIf="passError"
-              >Incorrect Password</small
-            >
+            <div class="text-danger" *ngIf="passwords.touched">
+              <small *ngIf="passwords.errors?.required">
+                Password is required.
+              </small>
+              <small *ngIf="passwords.errors?.pattern">
+                Must contain at least one number and one uppercase and lowercase
+                letter, and at least 8 or more characters.
+              </small>
+              <small class="text-danger" *ngIf="passError"
+                >Incorrect Password</small
+              >
+            </div>
           </div>
           <button
             class="btn btn-primary"

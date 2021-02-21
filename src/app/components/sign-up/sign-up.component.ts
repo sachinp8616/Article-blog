@@ -11,12 +11,19 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SignUpComponent implements OnInit {
   constructor(private router: Router, private auth: AuthService) {}
 
+  info: any = {
+    name: '',
+    email: '',
+    password: '',
+    confirmpassword: '',
+  };
+
   ngOnInit(): void {}
 
-  onSubmit(info: any) {
-    delete info.cpassword;
+  onSubmit() {
+    delete this.info.confirmpassword;
     this.auth.register({
-      ...info,
+      ...this.info,
       isAdmin: false,
     });
     this.router.navigate(['sign-in']);

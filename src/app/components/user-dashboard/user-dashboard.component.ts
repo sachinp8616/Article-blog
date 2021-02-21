@@ -15,10 +15,10 @@ export class UserDashboardComponent implements OnInit {
 
   constructor(private router: Router, private user: UserService) {}
 
-  ngOnInit(): void {
-    this.subscription = this.user.getPosts().subscribe((resp) => {
-      // this.posts = resp;
-      // console.log(this.posts);
+  ngOnInit(): void {}
+
+  onGetPosts() {
+    this.user.getPosts().subscribe((resp) => {
       resp.map((item) => {
         if (item.created_by == this.userName.name) {
           this.posts.push(item);
@@ -34,8 +34,10 @@ export class UserDashboardComponent implements OnInit {
 
   onDeletePost(id: any) {
     if (confirm('Do you want delete this post?')) {
+      this.posts = '';
       this.user.deletePost(id);
     }
+    this.router.navigate(['create-post']);
   }
 
   onEdit(id: any) {
@@ -51,7 +53,7 @@ export class UserDashboardComponent implements OnInit {
     this.router.navigate(['create-post']);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  ngAfterViewInit(): void {
+    this.onGetPosts();
   }
 }
