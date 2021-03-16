@@ -2,45 +2,28 @@
   <button class="btn btn-primary" (click)="createPost()">Create Post</button>
 </div>
 
-<div class="row mt-5">
-  <div class="col">
-    <div class="table-responsive">
-      <table class="table table-bordered text-nowrap text-center">
-        <thead class="bg-dark text-light">
-          <tr>
-            <th>Date</th>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Approve/Reject</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of posts$ | async">
-            <td>{{ post.created_at }}</td>
-            <td>{{ post.created_by }}</td>
-            <td>{{ post.title }}</td>
-            <td>{{ post.desc }}</td>
-            <td>
-              <button
-                [ngClass]="
-                  post.isAproved ? 'btn btn-danger' : 'btn btn-success'
-                "
-                (click)="toggler(post.key, post)"
-              >
-                {{ post.isAproved ? "Reject" : "Approve" }}
-              </button>
-            </td>
-            <td>
-              <i
-                class="fas fa-trash text-danger"
-                (click)="onDeletePost(post.key)"
-              ></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<div class="mt-5">
+  <div class="col-md-10 offset-md-1">
+    <div class="card mb-2" *ngFor="let post of posts$ | async">
+      <div class="card-body">
+        <h1>{{ post.title }}</h1>
+        <em
+          >posted by <strong>{{ post.created_by }}</strong> on
+          <strong>{{ post.created_at }}</strong>
+        </em>
+        <p>{{ post.desc }}</p>
+        <div class="text-right">
+          <button
+            (click)="toggler(post.key, post)"
+            [ngClass]="post.isAproved ? 'btn btn-warning' : 'btn btn-success'"
+          >
+            {{ post.isAproved ? "Reject" : "Aprove" }}
+          </button>
+          <button class="btn btn-danger ml-3" (click)="onDeletePost(post.key)">
+            Delete
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

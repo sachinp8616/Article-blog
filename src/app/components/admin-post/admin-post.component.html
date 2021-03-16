@@ -29,6 +29,7 @@
               placeholder="Description"
               cols="30"
               rows="5"
+              (keyup.enter)="onSubmit()"
               [ngClass]="{ 'is-invalid': femail.errors && femail.touched }"
             ></textarea>
             <div class="invalid-feedback">(Description is Required)</div>
