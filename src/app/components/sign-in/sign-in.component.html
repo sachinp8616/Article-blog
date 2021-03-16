@@ -5,65 +5,31 @@
         <h3>Sign In</h3>
       </div>
       <div class="card-body">
-        <form #signinForm="ngForm">
-          <div class="form-group">
-            <label for="">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              name="email"
-              [(ngModel)]="email"
-              required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-              #femail="ngModel"
-              [ngClass]="{ 'is-invalid': femail.errors && femail.touched }"
-            />
-            <div class="text-danger" *ngIf="femail.touched">
-              <small *ngIf="femail.errors?.required">Email is a required</small>
-              <small *ngIf="femail.errors?.pattern"
-                >This is not a valid Email</small
-              >
-            </div>
-            <small class="text-danger" *ngIf="emailErr"
-              >Email does not exists</small
-            >
-          </div>
-          <div class="form-group">
-            <label for="">Password</label>
-            <input
-              type="password"
-              [(ngModel)]="password"
-              name="password"
-              class="form-control"
-              required
-              #passwords="ngModel"
-              pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-              [ngClass]="{
-                'is-invalid': passwords.errors && passwords.touched
-              }"
-            />
-            <div class="text-danger" *ngIf="passwords.touched">
-              <small *ngIf="passwords.errors?.required">
-                Password is required.
-              </small>
-              <small *ngIf="passwords.errors?.pattern">
-                Must contain at least one number and one uppercase and lowercase
-                letter, and at least 8 or more characters.
-              </small>
-              <small class="text-danger" *ngIf="passError"
-                >Incorrect Password</small
-              >
-            </div>
-          </div>
-          <button
-            class="btn btn-primary"
-            type="button"
-            (click)="onSubmit()"
-            [disabled]="!signinForm.valid"
-          >
-            SignIn
-          </button>
-        </form>
+        <div class="form-group">
+          <label for="">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="email"
+            [ngClass]="errors.email ? 'is-invalid' : ''"
+          />
+          <div class="invalid-feedback">{{ errors.email }}</div>
+        </div>
+        <div class="form-group">
+          <label for="">Password</label>
+          <input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            class="form-control"
+            [ngClass]="errors.password ? 'is-invalid' : ''"
+          />
+          <div class="invalid-feedback">{{ errors.password }}</div>
+        </div>
+        <button class="btn btn-primary" type="button" (click)="onSubmit()">
+          SignIn
+        </button>
       </div>
     </div>
   </div>

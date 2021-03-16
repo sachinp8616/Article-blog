@@ -57,4 +57,18 @@ export class UserService {
       return true;
     }
   }
+
+  checkExists() {
+    return this.db
+      .list('user')
+      .snapshotChanges()
+      .pipe(
+        map((changes) =>
+          changes.map((item) => ({
+            key: item.key,
+            ...item.payload.exportVal(),
+          }))
+        )
+      );
+  }
 }

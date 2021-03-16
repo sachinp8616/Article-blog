@@ -5,7 +5,7 @@
         <h5>Sign Up</h5>
       </div>
       <div class="card-body">
-        <form #signupForm="ngForm">
+        <form>
           <div class="form-group">
             <label for="">Name</label>
             <input
@@ -13,13 +13,10 @@
               class="form-control"
               name="name"
               ngModel
-              [(ngModel)]="info.name"
-              required
-              minlength="3"
-              #fname="ngModel"
-              [ngClass]="{ 'is-invalid': fname.errors && fname.touched }"
+              [(ngModel)]="name"
+              [ngClass]="errors.name ? 'is-invalid' : ''"
             />
-            <div class="invalid-feedback">Name is Required</div>
+            <div class="invalid-feedback">{{ errors.name }}</div>
           </div>
           <div class="form-group">
             <label for="">Email</label>
@@ -28,79 +25,35 @@
               class="form-control"
               name="email"
               ngModel
-              [(ngModel)]="info.email"
-              required
-              minlength="6"
-              #femail="ngModel"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-              [ngClass]="{ 'is-invalid': femail.errors && femail.touched }"
+              [(ngModel)]="email"
+              [ngClass]="errors.email ? 'is-invalid' : ''"
+              (change)="onChangeHandler()"
             />
-            <!-- <div class="invalid-feedback">Email is Required</div> -->
-            <div class="text-danger" *ngIf="femail.touched">
-              <small *ngIf="femail.errors?.required">Email is a required</small>
-              <small *ngIf="femail.errors?.pattern"
-                >This is not a valid Email</small
-              >
-            </div>
+            <div class="invalid-feedback">{{ errors.email }}</div>
           </div>
           <div class="form-group">
             <label for="">Password</label>
-            <div class="form-group">
-              <input
-                type="password"
-                [(ngModel)]="info.password"
-                name="password"
-                class="form-control"
-                required
-                #password="ngModel"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                [ngClass]="{
-                  'is-invalid': password.errors && password.touched
-                }"
-              />
-              <div *ngIf="password.touched" class="text-danger">
-                <small *ngIf="password.errors?.required">
-                  Password is required.
-                </small>
-                <small *ngIf="password.errors?.pattern">
-                  Must contain at least one number and one uppercase and
-                  lowercase letter, and at least 8 or more characters.
-                </small>
-              </div>
-            </div>
+            <input
+              type="password"
+              [(ngModel)]="password"
+              name="password"
+              class="form-control"
+              [ngClass]="errors.password ? 'is-invalid' : ''"
+            />
+            <div class="invalid-feedback">{{ errors.password }}</div>
           </div>
           <div class="form-group">
             <label for="">Confirm Password</label>
-            <div class="form-group">
-              <input
-                type="password"
-                [(ngModel)]="info.confirmpassword"
-                name="confirmpassword"
-                class="form-control"
-                required
-                #confirmpassword="ngModel"
-                pattern="{{ password.value }}"
-                [ngClass]="{
-                  'is-invalid':
-                    confirmpassword.errors && confirmpassword.touched
-                }"
-              />
-              <div *ngIf="confirmpassword.touched" class="text-danger">
-                <small *ngIf="confirmpassword.errors?.required">
-                  Confirm password is required.
-                </small>
-                <small *ngIf="confirmpassword.errors?.pattern">
-                  Password & Confirm Password does not match.
-                </small>
-              </div>
-            </div>
+            <input
+              type="password"
+              [(ngModel)]="confirmpassword"
+              name="confirmpassword"
+              class="form-control"
+              [ngClass]="errors.confirmpassword ? 'is-invalid' : ''"
+            />
+            <div class="invalid-feedback">{{ errors.confirmpassword }}</div>
           </div>
-          <button
-            class="btn btn-primary"
-            type="submit"
-            [disabled]="!signupForm.valid"
-            (click)="onSubmit()"
-          >
+          <button class="btn btn-primary" type="button" (click)="onSubmit()">
             SignUp
           </button>
         </form>
