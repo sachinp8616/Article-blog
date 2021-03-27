@@ -23,6 +23,8 @@
     "@fortawesome/fontawesome-free": "^5.15.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.6.0",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.0.0",
     "firebase": "^8.2.7",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
